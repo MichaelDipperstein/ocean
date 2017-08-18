@@ -1,0 +1,64 @@
+The following files are included in this turnin package:
+
+README                  This file
+correct.out             The correct output
+docs/p2ocean.pdf        My report on this project
+docs/speedup.pdf        Addendum to sp2ocean.pdf.  It discusses speedup and
+                        compares the SGI version of OCEAN to the thread version.
+
+thread/                 Pthread translation for SPLASH-2 Ocean
+mpi/                    Incorrect MPI translation of for SPLASH-2 Ocean
+mpiglobal/              /mpi with an attempt at correcting the problem
+                        caused by the use of non-dynamically allocated
+                        variables intended to be global.
+mtest/                  Small test code verifying the correctness of my
+                        MPI definitions of the PARMACS macros.
+sgifork/                SGI IRIX 6.4 translation for SPLASH-2 Ocean using
+                        Sys V shm and fork. (Stanford's porting, not mine)
+
+Running code:
+-------------
+The code contained in each of these directories is designed to run on an SGI
+Origin 2000.  With a little modification it should possible to run the thread
+code on other platforms supporting pthreads.
+
+What follows are directions for compilation and execution of code on an SGI
+Origin 2000.
+
+thread
+        Go to the thread subdirectory.
+        Run "make".
+        To execute the program enter OCEAN.
+        OCEAN -h will list parameters OCEAN accepts.
+        Output should be compared to correct.out for correctness.
+
+mpi
+        Go to the mpi subdirectory.
+        Run "make".
+        To execute the program enter mpirun -np X OCEAN -p X.
+        mpirun -np 1 OCEAN -h will list the parameters OCEAN accepts.
+        Output should be compared to correct.out for correctness.  You will
+        notice that only code executed on a single processor is correct.
+
+mpiglobal
+        Go to the mpiglobal subdirectory.
+        Run "make".
+        To execute the program enter mpirun -np X OCEAN -p X.
+        mpirun -np 1 OCEAN -h will list the parameters OCEAN accepts.
+        Output should be compared to correct.out for correctness.  You will
+        notice that only code aborts prior to completion.  With some
+        debugging it may be possible to get it to generate correct output.
+
+mtest
+        Go to the mtest subdirectory.
+        Run "make".
+        To execute the program enter mpirun -np X mtest
+        Examination of the slave function in mtest.c will make it obvious
+        what the correct output for this program is.
+
+sgifork
+        Go to the sgifork subdirectory.
+        Run "make".
+        To execute the program enter OCEAN.
+        OCEAN -h will list parameters OCEAN accepts.
+        Output should be compared to correct.out for correctness.
